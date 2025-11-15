@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Sun, Moon, Menu, X } from 'lucide-react'
+import { Sun, Moon } from 'lucide-react'
 import useTheme from '../hooks/useTheme'
 
 const links = [
@@ -23,6 +23,13 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
+
   const handleNav = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
     const el = document.querySelector(href)
@@ -38,8 +45,8 @@ export default function Navbar() {
         solid ? 'py-4 backdrop-blur-xl bg-white/[0.02] dark:bg-slate-900/[0.8] shadow-lg shadow-black/[0.03] dark:shadow-black/[0.1]' : 'py-6 bg-transparent'
       }`}
     >
-      <div className="container">
-        <nav className="relative flex items-center justify-between">
+      <div className="mx-auto flex w-full max-w-6xl px-4 sm:px-6">
+        <nav className="relative flex w-[70%] sm:w-full items-center justify-between">
           <motion.a 
             href="#home" 
             onClick={(e) => handleNav(e, '#home')} 
@@ -103,11 +110,32 @@ export default function Navbar() {
             >
               {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             </button>
-            <button 
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2.5 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] dark:bg-slate-800/40 dark:hover:bg-slate-800/60"
+            <button
+              type="button"
+              aria-label="Toggle navigation menu"
+              aria-expanded={isOpen}
+              onClick={() => setIsOpen((prev) => !prev)}
+              className={`relative flex h-11 w-11 items-center justify-center rounded-full border transition-all duration-300 ${
+                isOpen
+                  ? 'border-brand-light/60 bg-brand-light/20 shadow-[0_12px_40px_-10px_rgba(56,189,248,0.5)]'
+                  : 'border-slate-900/15 bg-slate-900/5 hover:bg-slate-900/10 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10'
+              }`}
             >
-              {isOpen ? <X size={18} /> : <Menu size={18} />}
+              <span
+                className={`absolute block h-0.5 w-6 rounded-full bg-slate-900 dark:bg-white transition-all duration-300 ${
+                  isOpen ? 'translate-y-0 rotate-45' : '-translate-y-2.5'
+                }`}
+              />
+              <span
+                className={`absolute block h-0.5 w-6 rounded-full bg-slate-900 dark:bg-white transition-all duration-300 ${
+                  isOpen ? 'opacity-0' : 'opacity-100'
+                }`}
+              />
+              <span
+                className={`absolute block h-0.5 w-6 rounded-full bg-slate-900 dark:bg-white transition-all duration-300 ${
+                  isOpen ? 'translate-y-0 -rotate-45' : 'translate-y-2.5'
+                }`}
+              />
             </button>
           </div>
 
@@ -115,27 +143,45 @@ export default function Navbar() {
           <AnimatePresence>
             {isOpen && (
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.2 }}
-                className="absolute top-full left-0 right-0 mt-4 py-4 px-6 rounded-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.05] shadow-xl md:hidden"
+                key="mobile-menu"
+                initial={{ clipPath: 'circle(0% at 90% 6%)' }}
+                animate={{ clipPath: 'circle(160% at 90% 6%)' }}
+                exit={{ clipPath: 'circle(0% at 90% 6%)' }}
+                transition={{ type: 'spring', stiffness: 220, damping: 24 }}
+                className="fixed inset-0 z-20 flex items-center justify-center overflow-hidden bg-slate-950/90 backdrop-blur-2xl md:hidden"
+                onClick={() => setIsOpen(false)}
               >
-                <div className="flex flex-col gap-3">
-                  {links.map((link, i) => (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.92 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.92 }}
+                  transition={{ duration: 0.25 }}
+                  className="relative z-30 flex h-full w-full max-w-sm flex-col items-center justify-center gap-8 px-8 text-center"
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  {links.map((link, index) => (
                     <motion.a
                       key={link.href}
                       href={link.href}
                       onClick={(e) => handleNav(e, link.href)}
-                      className="text-sm font-medium text-neutral-light dark:text-neutral-dark hover:text-brand-light dark:hover:text-brand-light transition-colors"
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.2, delay: 0.05 * i }}
+                      className="w-full text-2xl font-semibold text-white tracking-wide"
+                      initial={{ opacity: 0, y: 24 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: 0.12 * index }}
                     >
                       {link.label}
                     </motion.a>
                   ))}
-                </div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.45 }}
+                    className="text-sm text-white/70"
+                  >
+                    Tap outside or choose a link to close
+                  </motion.div>
+                </motion.div>
               </motion.div>
             )}
           </AnimatePresence>

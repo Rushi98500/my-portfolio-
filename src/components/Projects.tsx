@@ -49,12 +49,14 @@ export default function Projects() {
             >
               {/* Card background with glassmorphism */}
               <motion.div
-                className="absolute inset-0 bg-white/[0.02] dark:bg-white/[0.03] backdrop-blur-xl rounded-2xl border border-white/10 shadow-xl dark:shadow-black/20"
+                className="absolute inset-0 rounded-2xl border border-white/10 bg-white/[0.02] dark:bg-white/[0.03] backdrop-blur-xl shadow-xl transition-all duration-500 group-hover:border-indigo-400/40 group-hover:bg-indigo-500/10 group-hover:shadow-[0_28px_60px_-30px_rgba(99,102,241,0.7)]"
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: false, amount: 0.5 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               />
+
+              <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 bg-gradient-to-br from-indigo-500/25 via-transparent to-purple-500/20 transition-opacity duration-500 group-hover:opacity-100" />
 
               {/* Decorative gradient circles */}
               <motion.div
@@ -75,7 +77,7 @@ export default function Projects() {
               />
 
               {/* Content */}
-              <div className="relative p-8">
+              <div className="relative z-10 p-8">
                 <div className="flex flex-col h-full">
                   <h3 className="text-2xl font-bold bg-gradient-brand text-transparent bg-clip-text">
                     {project.title}
