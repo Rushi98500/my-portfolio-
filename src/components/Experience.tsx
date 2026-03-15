@@ -11,15 +11,15 @@ export default function Experience() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8 }}
           className="text-center"
         >
           <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: 0 }}
             className="text-4xl md:text-5xl font-bold bg-gradient-brand text-transparent bg-clip-text"
           >
             Work Experience
@@ -27,8 +27,8 @@ export default function Experience() {
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
             className="mt-6 text-lg text-neutral-light dark:text-neutral-dark max-w-2xl mx-auto"
           >
             A journey through my professional experience and key achievements.
@@ -41,13 +41,13 @@ export default function Experience() {
               key={exp.company}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               whileHover={{ y: -5 }}
               className="group relative"
             >
               {/* Card background with glassmorphism */}
-              <div className="absolute inset-0 bg-white/[0.02] dark:bg-white/[0.03] backdrop-blur-xl rounded-2xl border border-white/10 shadow-xl dark:shadow-black/20" />
+              <div className="absolute inset-0 bg-white/[0.06] dark:bg-white/[0.08] backdrop-blur-xl rounded-2xl border border-white/10 shadow-xl dark:shadow-black/20 group-hover:border-brand-light/40 group-hover:shadow-[0_28px_60px_-30px_rgba(123,75,255,0.5)]" />
               
               {/* Decorative gradient circles */}
               <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-brand rounded-full opacity-0 group-hover:opacity-10 blur-2xl transition-opacity duration-500" />
@@ -88,7 +88,7 @@ export default function Experience() {
                     <motion.li 
                       key={achievement}
                       variants={{
-                        hidden: { opacity: 0, x: -20 },
+                        hidden: { opacity: 0, x: 16 },
                         show: { opacity: 1, x: 0 }
                       }}
                       className="flex gap-4 text-neutral-light/90 dark:text-neutral-dark/90"

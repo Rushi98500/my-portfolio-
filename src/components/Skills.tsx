@@ -15,7 +15,7 @@ const container = {
 }
 
 const item = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 30 },
   show: { opacity: 1, y: 0 }
 }
 
@@ -95,12 +95,12 @@ function MagneticSkillCard({ skill, variants }: MagneticSkillCardProps) {
     <motion.div
       variants={variants}
       className="magnetic-card group relative overflow-visible"
-      style={magneticStyles}
+      style={{ ...magneticStyles, willChange: 'transform' }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       whileHover={{ scale: 1.03 }}
     >
-      <div className="absolute inset-0 bg-white/[0.02] dark:bg-white/[0.03] backdrop-blur-xl rounded-2xl border border-white/10 shadow-xl dark:shadow-black/20" />
+      <div className="absolute inset-0 bg-white/[0.06] dark:bg-white/[0.08] backdrop-blur-xl rounded-2xl border border-white/10 shadow-xl dark:shadow-black/20" />
       <div className="absolute inset-0 bg-gradient-brand opacity-0 group-hover:opacity-10 rounded-2xl blur transition-opacity duration-300" />
       <div className="particles-field" ref={particleFieldRef} />
 
@@ -120,6 +120,7 @@ function MagneticSkillCard({ skill, variants }: MagneticSkillCardProps) {
             <img
               src={skill.icon}
               alt={`${skill.name} logo`}
+              loading="lazy"
               className={`w-12 h-12 object-contain group-hover:scale-110 transition-transform duration-300 ${
                 skill.name === 'Tailwind CSS' ? 'dark:invert' : 'dark:brightness-90'
               }`}
@@ -153,15 +154,15 @@ export default function Skills() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8 }}
           className="text-center"
         >
           <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: 0 }}
             className="text-4xl md:text-5xl font-bold bg-gradient-brand text-transparent bg-clip-text"
           >
             Technical Skills
@@ -169,8 +170,8 @@ export default function Skills() {
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
             className="mt-6 text-lg text-neutral-light dark:text-neutral-dark max-w-2xl mx-auto"
           >
             A comprehensive list of technologies and tools I work with to create amazing web experiences.
@@ -183,16 +184,16 @@ export default function Skills() {
               key={category}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.2 }}
+              viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
               className="flex flex-col items-center"
             >
               <motion.h3 
                 className="text-2xl font-semibold text-brand-light mb-8 text-center"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.5 }}
-                transition={{ duration: 0.5 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.5, delay: 0 }}
               >
                 {categories[category as keyof typeof categories]}
               </motion.h3>
@@ -201,8 +202,8 @@ export default function Skills() {
                 variants={container}
                 initial="hidden"
                 whileInView="show"
-                viewport={{ once: false, amount: 0.2 }}
-                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 max-w-6xl mx-auto  sm:flex "
+                viewport={{ once: true, amount: 0.2 }}
+                className="flex flex-wrap justify-center gap-8 max-w-6xl mx-auto"
               >
                 {categorySkills.map((skill) => (
                   <MagneticSkillCard key={skill.name} skill={skill} variants={item} />

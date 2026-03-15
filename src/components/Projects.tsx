@@ -13,14 +13,14 @@ export default function Projects() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.3 }}
           className="text-center"
         >
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: 0 }}
             className="text-4xl md:text-5xl font-bold bg-gradient-brand text-transparent bg-clip-text"
           >
             Featured Projects
@@ -28,8 +28,8 @@ export default function Projects() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
             className="mt-6 text-lg text-neutral-light dark:text-neutral-dark max-w-2xl mx-auto"
           >
             Showcasing my experience in building modern web applications with focus on user experience and scalable architecture.
@@ -43,7 +43,7 @@ export default function Projects() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              viewport={{ once: false, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.3 }}
               whileHover={{ y: -5 }}
               className="group relative"
             >
@@ -52,7 +52,7 @@ export default function Projects() {
                 className="absolute inset-0 rounded-2xl border border-white/10 bg-white/[0.02] dark:bg-white/[0.03] backdrop-blur-xl shadow-xl transition-all duration-500 group-hover:border-indigo-400/40 group-hover:bg-indigo-500/10 group-hover:shadow-[0_28px_60px_-30px_rgba(99,102,241,0.7)]"
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: false, amount: 0.5 }}
+                viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               />
 
@@ -63,7 +63,7 @@ export default function Projects() {
                 className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-brand rounded-full opacity-0 group-hover:opacity-10 blur-2xl transition-opacity duration-500"
                 initial={{ scale: 0.8, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 0 }}
-                viewport={{ once: false, amount: 0.5 }}
+                viewport={{ once: true, amount: 0.5 }}
                 whileHover={{ opacity: 0.1, scale: 1.2 }}
                 transition={{ duration: 0.8 }}
               />
@@ -71,7 +71,7 @@ export default function Projects() {
                 className="absolute -bottom-4 -left-4 w-32 h-32 bg-brand-cyan rounded-full opacity-0 group-hover:opacity-10 blur-2xl transition-opacity duration-500"
                 initial={{ scale: 0.8, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 0 }}
-                viewport={{ once: false, amount: 0.5 }}
+                viewport={{ once: true, amount: 0.5 }}
                 whileHover={{ opacity: 0.1, scale: 1.2 }}
                 transition={{ duration: 0.8 }}
               />
